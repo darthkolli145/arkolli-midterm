@@ -1,0 +1,119 @@
+.quarterly-goals {
+    background-color: #fff;
+    padding: 32px;
+    border-radius: 12px;
+    width: 387px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Oxygen', sans-serif;
+    margin: auto;
+  
+    .header {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+  
+      .header-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+  
+        h2 {
+          font-size: 27.5px;
+          font-weight: 400;
+          color: #4b5853;
+          margin: 0;
+        }
+  
+        .edit-icon {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+        }
+      }
+  
+      h3 {
+        font-size: 22.5px;
+        font-weight: 700;
+        color: #4b5853;
+        margin: 8px 0;
+      }
+    }
+  
+    .goal {
+      margin: 15px 0;
+      display: flex;
+      flex-direction: column;
+  
+      &.completed {
+        opacity: 0.6;
+  
+        .goal-content {
+          p {
+            text-decoration: line-through;
+          }
+        }
+      }
+  
+      .goal-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+  
+        .checkbox {
+          width: 21px;
+          height: 21px;
+          cursor: pointer;
+        }
+  
+        p {
+          font-size: 16.25px;
+          font-weight: 400;
+          color: #5a5a5a;
+          margin: 0;
+        }
+  
+        .tag {
+          display: block;
+          font-size: 15px;
+          margin-top: 5px;
+        }
+  
+        .apply-internships {
+          color: #2dbdb1;
+        }
+  
+        .class-algorithms {
+          color: #ffb987;
+        }
+  
+        .interview-technical {
+          color: #ee8b72;
+        }
+  
+        .default-category {
+          color: #5a5a5a;
+        }
+      }
+  
+      hr {
+        border: 0;
+        border-top: 1px solid #000000;
+        opacity: 15%;
+        margin: 15px 0;
+      }
+    }
+  
+    .add-goal {
+      font-size: 17.5px;
+      font-weight: 400;
+      color: #5a5a5a;
+      cursor: pointer;
+      text-align: left;
+      margin-top: 10px;
+  
+      &:hover {
+        color: #4b5853;
+      }
+    }
+  }
+  
