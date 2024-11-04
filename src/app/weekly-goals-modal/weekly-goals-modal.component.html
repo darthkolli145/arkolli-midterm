@@ -1,1 +1,31 @@
-<p>weekly-goals-modal works!</p>
+<div class="modal-container">
+    <div class="modal-header">
+      <div class="week">
+        <h2>Weekly Goals</h2>
+        <span class="date-range">9/24 - 9/30</span>
+      </div>
+      <button class="close-button" (click)="closeModal()">&#10005;</button>
+    </div>
+  
+    <div class="goal-item" *ngFor="let goal of goals; let i = index">
+      <span class="drag-icon"></span>
+      <input
+        type="text"
+        [placeholder]="goal.placeholder"
+        [(ngModel)]="goal.text"
+        class="goal-input"
+      />
+      <select
+        [(ngModel)]="goal.category"
+        class="category-select"
+        [ngClass]="getCategoryClass(goal.category)"
+      >
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+  
+    <button class="save-button" (click)="saveGoals()">Save</button>
+  </div>
+  
