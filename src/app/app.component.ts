@@ -6,7 +6,7 @@ import { WeeklyGoalsModalComponent } from './weekly-goals-modal/weekly-goals-mod
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, WeeklyGoalsComponent, WeeklyGoalsModalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
