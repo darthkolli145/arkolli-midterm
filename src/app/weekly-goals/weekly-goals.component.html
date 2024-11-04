@@ -1,1 +1,39 @@
-<p>weekly-goals works!</p>
+<div class="quarterly-goals">
+    <div class="header">
+      <div class="header-title">
+        <h2>Weekly Goals</h2>
+        <img
+          src="images/Vectorpencil.svg"
+          alt="Edit Icon"
+          class="edit-icon"
+          (click)="editGoals()"
+        />
+      </div>
+      <h3>9/24 - 9/30</h3>
+    </div>
+  
+    <div
+      class="goal"
+      *ngFor="let goal of goals; let i = index; last as isLast"
+      [ngClass]="{ completed: goal.isCompleted }"
+    >
+      <div class="goal-content">
+        <img
+          [src]="goal.isCompleted ? 'images/Checked.svg' : 'images/Rectangle.svg'"
+          alt="Checkbox"
+          class="checkbox"
+          (click)="toggleGoalCompletion(goal)"
+        />
+        <div>
+          <p>{{ goal.text }}</p>
+          <span class="tag {{ getCategoryClass(goal.category) }}">
+            {{ goal.category }}
+          </span>
+        </div>
+      </div>
+      <hr *ngIf="!isLast" />
+    </div>
+  
+    <div class="add-goal" (click)="addGoal()">+ Add a weekly goal</div>
+  </div>
+  
