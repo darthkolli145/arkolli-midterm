@@ -1,4 +1,4 @@
-<div class="quarterly-goals">
+  <div class="quarterly-goals">
     <div class="header">
       <div class="header-title">
         <h2>Weekly Goals</h2>
@@ -36,4 +36,10 @@
   
     <div class="add-goal" (click)="addGoal()">+ Add a weekly goal</div>
   </div>
+  
+  <app-weekly-goals-modal
+    *ngIf="isModalOpen"
+    [goals]="goals"
+    (close)="onModalClose($event)"
+  ></app-weekly-goals-modal>
   

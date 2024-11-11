@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { WeeklyGoalsModalComponent } from '../weekly-goals-modal/weekly-goals-modal.component';
 
 @Component({
   selector: 'app-weekly-goals',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, WeeklyGoalsModalComponent],
   templateUrl: './weekly-goals.component.html',
   styleUrls: ['./weekly-goals.component.scss'],
 })
 export class WeeklyGoalsComponent {
+  isModalOpen = false;
+
   goals = [
     {
       text: 'Finish Google cover letter...',
@@ -25,6 +28,7 @@ export class WeeklyGoalsComponent {
       category: '#interview-technical',
       isCompleted: false,
     },
+    // ... other goals ...
   ];
 
   categories = [
@@ -32,6 +36,7 @@ export class WeeklyGoalsComponent {
     '#class-algorithms',
     '#interview-technical',
     'quarterly goal...',
+    // ... categories ...
   ];
 
   getCategoryClass(category: string): string {
@@ -45,6 +50,7 @@ export class WeeklyGoalsComponent {
       default:
         return 'default-category';
     }
+    // ... existing logic ...
   }
 
   toggleGoalCompletion(goal: any) {
@@ -52,14 +58,17 @@ export class WeeklyGoalsComponent {
   }
 
   addGoal() {
-    this.goals.push({
-      text: 'New Goal',
-      category: 'quarterly goal...',
-      isCompleted: false,
-    });
+    this.isModalOpen = true;
   }
 
   editGoals() {
-    console.log('Edit goals clicked');
+    this.isModalOpen = true;
+  }
+
+  onModalClose(updatedGoals: any[] | undefined) {
+    this.isModalOpen = false;
+    if (updatedGoals) {
+      this.goals = updatedGoals;
+    }
   }
 }

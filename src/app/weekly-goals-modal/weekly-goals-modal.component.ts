@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -7,24 +7,47 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './weekly-goals-modal.component.html',
-  styleUrls: ['./weekly-goals-modal.component.scss']
+  styleUrls: ['./weekly-goals-modal.component.scss'],
 })
 export class WeeklyGoalsModalComponent {
-  goals = [
-    { text: 'Finish Google cover letter', category: '#apply-internships', placeholder: 'Enter your goal...' },
-    { text: 'Apply to Microsoft', category: '#apply-internships', placeholder: 'Enter your goal...' },
-    { text: 'Practice implementing data structures', category: '#class-algorithms', placeholder: 'Enter your goal...' },
-    { text: '', category: 'quarterly goal...', placeholder: 'Enter your goal...' },
+  @Input() set goals(value: any[]) {
+    // Make a deep copy to prevent direct mutation
+    this._goals = value ? JSON.parse(JSON.stringify(value)) : [];
+    this.ensureEmptyGoalAtEnd();
+  }
+  get goals(): any[] {
+    return this._goals;
+  }
+  private _goals: any[] = [];
+
+  @Output() close = new EventEmitter<any[]>();
+
+  categories = [
+    '#apply-internships',
+    '#class-algorithms',
+    '#interview-technical',
+    'quarterly goal...',
   ];
 
-  categories = ['#apply-internships', '#class-algorithms', '#interview-technical', 'quarterly goal...'];
+  private ensureEmptyGoalAtEnd() {
+    const lastGoal = this._goals[this._goals.length - 1];
+    if (!lastGoal || lastGoal.text.trim() !== '') {
+      this._goals.push({
+        text: '',
+        category: 'quarterly goal...',
+        placeholder: 'Enter your goal...',
+      });
+    }
+  }
 
   saveGoals() {
-    console.log('Goals saved:', this.goals);
+    // Remove any empty goals before saving
+    const nonEmptyGoals = this.goals.filter(goal => goal.text.trim() !== '');
+    this.close.emit(nonEmptyGoals);
   }
 
   closeModal() {
-    console.log('Modal closed');
+    this.close.emit(); // Emits undefined
   }
 
   getCategoryClass(category: string): string {
@@ -37,6 +60,21 @@ export class WeeklyGoalsModalComponent {
         return 'interview-technical';
       default:
         return 'default-category';
+    }
+  }
+
+  onEnterKey(event: Event, index: number) {
+    event.preventDefault();
+    const currentGoal = this.goals[index];
+    if (currentGoal.text.trim() !== '') {
+      // If the last goal, add a new empty goal
+      if (index === this.goals.length - 1) {
+        this.goals.push({
+          text: '',
+          category: 'quarterly goal...',
+          placeholder: 'Enter your goal...',
+        });
+      }
     }
   }
 }

@@ -138,5 +138,8 @@
     &:hover {
       background-color: #00a2a2;
     }
+    .goal-input::placeholder {
+      color: grey;
+    }
   }
   
