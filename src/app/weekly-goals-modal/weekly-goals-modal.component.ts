@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
 })
 export class WeeklyGoalsModalComponent {
   @Input() set goals(value: any[]) {
-    // Make a deep copy to prevent direct mutation
     this._goals = value ? JSON.parse(JSON.stringify(value)) : [];
     this.ensureEmptyGoalAtEnd();
   }
@@ -41,13 +40,12 @@ export class WeeklyGoalsModalComponent {
   }
 
   saveGoals() {
-    // Remove any empty goals before saving
     const nonEmptyGoals = this.goals.filter(goal => goal.text.trim() !== '');
     this.close.emit(nonEmptyGoals);
   }
 
   closeModal() {
-    this.close.emit(); // Emits undefined
+    this.close.emit();
   }
 
   getCategoryClass(category: string): string {
@@ -67,7 +65,6 @@ export class WeeklyGoalsModalComponent {
     event.preventDefault();
     const currentGoal = this.goals[index];
     if (currentGoal.text.trim() !== '') {
-      // If the last goal, add a new empty goal
       if (index === this.goals.length - 1) {
         this.goals.push({
           text: '',

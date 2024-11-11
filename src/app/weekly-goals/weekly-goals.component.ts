@@ -28,7 +28,6 @@ export class WeeklyGoalsComponent {
       category: '#interview-technical',
       isCompleted: false,
     },
-    // ... other goals ...
   ];
 
   categories = [
@@ -36,7 +35,6 @@ export class WeeklyGoalsComponent {
     '#class-algorithms',
     '#interview-technical',
     'quarterly goal...',
-    // ... categories ...
   ];
 
   getCategoryClass(category: string): string {
@@ -50,7 +48,6 @@ export class WeeklyGoalsComponent {
       default:
         return 'default-category';
     }
-    // ... existing logic ...
   }
 
   toggleGoalCompletion(goal: any) {
